@@ -86,3 +86,23 @@ class PostgresDBSnapshotTemplate(DBSnapshot):
     Cache set behavior: Saves DB in a new db, named after cache hit
     Cache hit behavior: Creates DB from template
     """
+
+
+class PytestFixtureCache:
+    """Pytest integration.
+
+    Hashes fixtures and caches them based on their side effect.
+
+    Runs and loads fixtures of the pytest TopRequest.
+
+    .. code-block:: python
+        @cache_sideffect('db')
+        @pytest.fixture
+        def user() -> "User":
+            # ...
+            return user
+    """
+
+
+class SideEffectMark:
+    """A Mark to designate a type of side effect."""
