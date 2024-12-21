@@ -1,4 +1,4 @@
-"""pgsnap: Snapshot databases fast
+"""pgsnap: Snapshot databases fast.
 
 Intended for small databases.
 
@@ -33,3 +33,56 @@ class FileSnapshot(Snapshot):
 
 class DBSnapshot(Snapshot):
     """Base class for a way to snapshot a database state."""
+
+
+"""
+# Types of caching
+Type of caching, simple to complex.
+
+2 main types:
+- Output
+  - Instrumentation: Happens at end of tests
+  - Types of storage:
+    - File / folders
+    - Database storage
+  - On cache hit: Copies or imports (with fast strategies like TEMPLATE on postgres)
+- Playback
+  - Instrumentation: Records queries within test
+  - Cache hit: Runs / publishes queries
+"""
+
+
+class PostgresDBSnapshotSQLEmission(DBSnapshot):
+    """Record SQL generated. On cache hit, execute SQL directly.
+
+    Upsides: Incremental deltas.
+    Downsides: Potentially fragile.
+
+    Record behavior: All SQL insert, update queries
+    Cache hit behavior: Runs SQL
+    Special notes: Recorder. Monitors SQL throughout test.
+    """
+
+
+class PostgresDBSnapshotDump(DBSnapshot):
+    """Snapshot DB. On cache hit, pg_restore(1), SQL.
+
+    Upsides: Guaranteed state of whole DB
+    Downsides: Stores whole db to dump, has to be restored
+
+    Cache set behavior: pg_dump
+    Cache hit behavior: pg_restore
+    """
+
+
+class PostgresDBSnapshotTemplate(DBSnapshot):
+    """Snapshot DB via Template.
+
+    Upsides: Fast, premier solution
+    Downsides:
+    - Overhead: Must be stored in postgres DB for access
+    - Pruning / nuking old DBs
+
+    Cache set behavior: Saves DB in a new db, named after cache hit
+    Cache hit behavior: Creates DB from template
+    """
