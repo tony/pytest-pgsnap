@@ -1,0 +1,21 @@
+# Changelog
+
+To install the unreleased pytest-pgsnap version, see [developmental releases](https://pytest-pgsnap.git-pull.com/quickstart.html#developmental-releases).
+
+[pip](https://pip.pypa.io/en/stable/):
+
+```console
+$ pip install --user --upgrade --pre pytest-pgsnap
+```
+
+## pytest-pgsnap 0.0.0 (unreleased)
+
+- _Add your latest changes from PRs here_
+
+### New features
+
+- Add stuff here
+
+<!---
+.. vim: set filetype=markdown:
+-->
