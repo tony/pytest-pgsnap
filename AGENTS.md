@@ -97,7 +97,7 @@ make dev_docs       # concurrent rebuild+serve (GNU make -J)
 ## Coding Standards
 
 - Ruff handles formatting and linting; run the formatter before committing.
-- mypy runs in strict mode—annotate new code thoroughly and prefer `import typing as t` with namespace access.
+- mypy runs in strict mode—annotate new code thoroughly and prefer `import typing as t` with namespace access for stdlib; third-party packages may use `from X import Y`.
 - Docstrings follow NumPy style (pydocstyle via Ruff); keep complex examples in dedicated tests instead of long doctests.
 - Prefer `pathlib.Path` over `os.path`; use f-strings for interpolation; keep Python ≥3.9 compatibility in mind.
 
