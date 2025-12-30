@@ -101,6 +101,24 @@ make dev_docs       # concurrent rebuild+serve (GNU make -J)
 - Docstrings follow NumPy style (pydocstyle via Ruff); keep complex examples in dedicated tests instead of long doctests.
 - Prefer `pathlib.Path` over `os.path`; use f-strings for interpolation; keep Python ≥3.9 compatibility in mind.
 
+## Doctests
+
+**All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
+
+**CRITICAL RULES:**
+- Doctests MUST actually execute - never comment out function calls or similar
+- Doctests MUST NOT be converted to `.. code-block::` as a workaround (code-blocks don't run)
+- If you cannot create a working doctest, **STOP and ask for help**
+
+**Available tools for doctests:**
+- `doctest_namespace` fixtures: `tmp_path`
+- Ellipsis for variable output: `# doctest: +ELLIPSIS`
+- Update `conftest.py` to add new fixtures to `doctest_namespace`
+
+**`# doctest: +SKIP` is NOT permitted** - it's just another workaround that doesn't test anything. Use fixtures properly.
+
+**Note:** This project has abstract snapshot base classes. Keep complex examples in dedicated tests under `tests/` rather than long doctests. For PostgreSQL-specific examples, use fixtures that mock or stub database operations.
+
 ## References
 
 - Docs: https://pytest-pgsnap.git-pull.com
