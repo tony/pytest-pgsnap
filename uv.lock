@@ -1147,7 +1147,7 @@ docs = [
     { name = "gp-libs" },
     { name = "linkify-it-py" },
     { name = "myst-parser" },
-    { name = "sphinx" },
+    { name = "sphinx", specifier = "<9" },
     { name = "sphinx-autobuild" },
     { name = "sphinx-autodoc-typehints" },
     { name = "sphinx-copybutton" },
