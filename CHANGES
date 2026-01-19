@@ -10,7 +10,9 @@ $ pip install --user --upgrade --pre pytest-pgsnap
 
 ## pytest-pgsnap 0.0.0 (unreleased)
 
-- _Add your latest changes from PRs here_
+### CI
+
+- Migrate to PyPI Trusted Publisher (#5)
 
 ### New features
 
