@@ -20,7 +20,7 @@ You can test the unpublished version of g before its released.
 
 # More information
 
-- Python support: >= 3.9, pypy
+- Python support: >= 3.10, pypy
 - Source: <https://github.com/git-pull/pytest-pgsnap>
 - Docs: <https://pytest-pgsnap.git-pull.com>
 - Changelog: <https://pytest-pgsnap.git-pull.com/history.html>

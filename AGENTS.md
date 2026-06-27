@@ -24,7 +24,7 @@ Key features:
 ## Development Environment
 
 This project uses:
-- Python 3.9+ (tool-versions lists interpreters up to 3.14)
+- Python 3.10+ (tool-versions lists interpreters up to 3.14)
 - [uv](https://github.com/astral-sh/uv) for dependency management and running commands
 - [ruff](https://github.com/astral-sh/ruff) for linting and formatting
 - [mypy](https://github.com/python/mypy) for type checking
@@ -99,7 +99,7 @@ make dev_docs       # concurrent rebuild+serve (GNU make -J)
 - Ruff handles formatting and linting; run the formatter before committing.
 - mypy runs in strict mode—annotate new code thoroughly and prefer `import typing as t` with namespace access.
 - Docstrings follow NumPy style (pydocstyle via Ruff); keep complex examples in dedicated tests instead of long doctests.
-- Prefer `pathlib.Path` over `os.path`; use f-strings for interpolation; keep Python ≥3.9 compatibility in mind.
+- Prefer `pathlib.Path` over `os.path`; use f-strings for interpolation; keep Python ≥3.10 compatibility in mind.
 
 ## Doctests
 
