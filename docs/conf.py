@@ -59,7 +59,9 @@ project_copyright = about["__copyright__"]
 version = "{}".format(".".join(about["__version__"].split("."))[:2])
 release = "{}".format(about["__version__"])
 
-exclude_patterns = ["_build"]
+# AGENTS.md is agent guidance, not a site page; keep Sphinx from
+# treating it as an orphan document.
+exclude_patterns = ["_build", "AGENTS.md", "CLAUDE.md"]
 
 pygments_style = "monokai"
 pygments_dark_style = "monokai"
