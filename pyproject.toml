@@ -46,7 +46,7 @@ Changes = "https://github.com/tony/pytest-pgsnap/blob/master/CHANGES"
 docs = [
   "sphinx<9",
   "furo",
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "sphinx-autobuild",
   "sphinx-autodoc-typehints",
   "sphinx-inline-tabs",
@@ -57,7 +57,7 @@ docs = [
   "linkify-it-py",
 ]
 testing = [
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "pytest",
   "pytest-rerunfailures",
   "pytest-mock",
