@@ -101,6 +101,25 @@ make dev_docs       # concurrent rebuild+serve (GNU make -J)
 - Docstrings follow NumPy style (pydocstyle via Ruff); keep complex examples in dedicated tests instead of long doctests.
 - Prefer `pathlib.Path` over `os.path`; use f-strings for interpolation; keep Python ≥3.10 compatibility in mind.
 
+**Classes with fields** — `NamedTuple`, dataclasses — document every field in
+an `Attributes` section:
+
+```python
+class SnapshotResolution(t.NamedTuple):
+    """Outcome of deciding which snapshot a fixture should restore from.
+
+    Attributes
+    ----------
+    path : pathlib.Path | None
+        Snapshot to restore from, or ``None`` on a cache miss.
+    """
+```
+
+Autodoc renders every field whether or not you describe it, so an
+undocumented `NamedTuple` field ships to the API docs as "Alias for field
+number 0" and a dataclass field ships bare. Document all of them — a class
+with three fields and two documented still ships a stub for the third.
+
 ## Doctests
 
 **All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
