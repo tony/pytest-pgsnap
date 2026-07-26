@@ -164,6 +164,11 @@ convention = "numpy"
 [tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
 "docs/conf.py" = [
+  # `linkcode_resolve` introspects arbitrary documented objects through
+  # `getattr` and `inspect`, which can raise anything. Each guard falls
+  # back to omitting one source link rather than failing the build, and
+  # the function tracks numpy's `conf.py` as cited in its docstring.
+  "BLE001",
   # Sphinx reads the package's metadata by exec'ing a module from this
   # repository, which keeps the docs build off an import of the package
   # being documented.
