@@ -42,3 +42,10 @@ The rule selection also reaches ruff for the first time: it lived under a
 table name ruff does not read, so linting ran against ruff's built-in
 defaults. The configured prefixes — pydocstyle, isort, `flake8-use-pathlib`
 and the rest — are now enforced as written.
+
+Those prefixes extend ruff's default rule set rather than replace it. ruff
+0.16 ships a curated default set as its recommended baseline, and an explicit
+`select` opts out of the whole thing; the project now uses `extend-select` so
+both run together. `flake8-bandit`'s `exec` check and `flake8-blind-except`
+are ignored for `docs/conf.py`, where the Sphinx config reads package
+metadata and guards autodoc introspection.
