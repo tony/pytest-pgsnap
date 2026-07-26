@@ -103,7 +103,7 @@ lint = [
 ]
 
 [project.entry-points.pytest11]
-sphinx = "pytest_pgsnap"
+pgsnap = "pytest_pgsnap"
 
 [build-system]
 requires = ["hatchling"]
