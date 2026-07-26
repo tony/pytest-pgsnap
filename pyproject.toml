@@ -69,7 +69,7 @@ coverage =[
   "pytest-cov",
 ]
 lint = [
-  "ruff",
+  "ruff>=0.16.0",
   "mypy",
   "typing-extensions",
 ]
