@@ -74,7 +74,7 @@ def pytest_unconfigure() -> None:
 def pytest_collect_file(
     file_path: pathlib.Path,
     parent: pytest.Collector,
-) -> t.Optional[t.Union["DocTestDocutilsFile", "_pytest.doctest.DoctestModule"]]:
+) -> t.Union["DocTestDocutilsFile", "_pytest.doctest.DoctestModule"] | None:
     """Test collector for pytest-doctest-docutils."""
     config = parent.config
     if file_path.suffix == ".py":
@@ -118,7 +118,7 @@ def _init_runner_class() -> type["doctest.DocTestRunner"]:
         def __init__(
             self,
             checker: t.Optional["doctest.OutputChecker"] = None,
-            verbose: t.Optional[bool] = None,
+            verbose: bool | None = None,
             optionflags: int = 0,
             continue_on_failure: bool = True,
         ) -> None:
@@ -230,7 +230,7 @@ def get_optionflags(config: pytest.Config) -> int:
 
 def _get_runner(
     checker: t.Optional["doctest.OutputChecker"] = None,
-    verbose: t.Optional[bool] = None,
+    verbose: bool | None = None,
     optionflags: int = 0,
     continue_on_failure: bool = True,
 ) -> "doctest.DocTestRunner":
@@ -254,7 +254,7 @@ class DocutilsDocTestRunner(doctest.DocTestRunner):
     def summarize(  # type: ignore
         self,
         out: "_Out",
-        verbose: t.Optional[bool] = None,
+        verbose: bool | None = None,
     ) -> tuple[int, int]:
         """Summarize the test runs."""
         string_io = io.StringIO()
