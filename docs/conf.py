@@ -141,7 +141,7 @@ intersphinx_mapping = {
 }
 
 
-def linkcode_resolve(domain: str, info: dict[str, str]) -> None | str:
+def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     """
     Determine the URL corresponding to Python object.
 
