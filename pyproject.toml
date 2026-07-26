@@ -103,9 +103,6 @@ lint = [
   "typing-extensions",
 ]
 
-[project.entry-points.pytest11]
-pgsnap = "pytest_pgsnap"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -139,7 +136,6 @@ include = ["src/*"]
 [tool.hatch.build.targets.wheel]
 packages = [
   "src/pgsnap",
-  "src/pytest_pgsnap.py"
 ]
 
 [tool.mypy]
@@ -149,12 +145,6 @@ files = [
   "src/",
   "tests/",
 ]
-
-[[tool.mypy.overrides]]
-module = [
-  "doctest_docutils",
-]
-ignore_missing_imports = true
 
 [tool.ruff]
 target-version = "py310"
@@ -189,7 +179,6 @@ ignore = [
 known-first-party = [
   "src",
   "pgsnap",
-  "pytest_pgsnap",
 ]
 combine-as-imports = true
 
