@@ -85,10 +85,9 @@ def pytest_collect_file(
                 _pytest.doctest._is_main_py(file_path),
             ),
         ):
-            mod: t.Union[
-                DocTestDocutilsFile,
-                _pytest.doctest.DoctestModule,
-            ] = _pytest.doctest.DoctestModule.from_parent(parent, path=file_path)
+            mod: DocTestDocutilsFile | _pytest.doctest.DoctestModule = (
+                _pytest.doctest.DoctestModule.from_parent(parent, path=file_path)
+            )
             return mod
     elif _is_doctest(config, file_path, parent):
         return DocTestDocutilsFile.from_parent(parent, path=file_path)
