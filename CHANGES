@@ -30,3 +30,15 @@ Workflow actions moved to their current major releases: `actions/checkout` v7,
 `astral-sh/setup-uv` v9.0.0, `codecov/codecov-action` v7, and
 `dorny/paths-filter` v4. Workflow behavior is unchanged, though setup-uv no
 longer prunes the uv cache, so the first run after this repopulates it.
+
+#### Lint floor moved to ruff 0.16 (#10)
+
+Minimum `ruff>=0.16.0` (was unpinned). 0.16.0 stabilizes
+`none-not-at-end-of-union` (`RUF036`) out of preview, and starts formatting
+Python code blocks inside Markdown, so `ruff format` now covers the docs tree
+alongside `src/`.
+
+The rule selection also reaches ruff for the first time: it lived under a
+table name ruff does not read, so linting ran against ruff's built-in
+defaults. The configured prefixes — pydocstyle, isort, `flake8-use-pathlib`
+and the rest — are now enforced as written.
