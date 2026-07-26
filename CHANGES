@@ -14,15 +14,37 @@ $ pip install --user --upgrade --pre pytest-pgsnap
 - _Add your latest changes from PRs here_
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Breaking changes
+
+#### The bundled doctest collector is gone (#10)
+
+pytest-pgsnap shipped a stale copy of gp-libs' `doctest-docutils` plugin.
+Both registered the same options, so the two could never load together — the
+duplicate plugin name hid that by letting only one win. Depend on
+[gp-libs](https://gp-libs.git-pull.com) for doctest collection; this package
+no longer registers a pytest plugin at all.
+
 ### New features
 
 - Add stuff here
+
+### Fixes
+
+- The docs build reads version metadata from the package again, instead of a
+  module path that predated the package layout (#10)
 
 <!---
 .. vim: set filetype=markdown:
 -->
 
 ### Development
+
+#### Python 3.14 and the pytest majors are tested (#10)
+
+The matrix covers Python 3.10 through 3.14 against pytest 7, 8, and 9 — the
+axis a pytest plugin integrates against, replacing an unused docutils one.
+3.14 is now declared in the classifiers. A `dev` dependency group was
+missing, so CI's install was a no-op and no job had ever reached the linter.
 
 #### CI actions updated to current majors
 
