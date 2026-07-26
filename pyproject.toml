@@ -43,6 +43,34 @@ Repository = "https://github.com/tony/pytest-pgsnap"
 Changes = "https://github.com/tony/pytest-pgsnap/blob/master/CHANGES"
 
 [dependency-groups]
+dev = [
+  # Docs
+  "sphinx<9",
+  "furo",
+  "gp-libs>=0.0.19",
+  "sphinx-autobuild",
+  "sphinx-autodoc-typehints",
+  "sphinx-inline-tabs",
+  "sphinxext-opengraph",
+  "sphinx-copybutton",
+  "sphinxext-rediraffe",
+  "myst-parser",
+  "linkify-it-py",
+  # Testing
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-mock",
+  "pytest-watcher",
+  # Coverage
+  "codecov",
+  "coverage",
+  "pytest-cov",
+  # Lint
+  "ruff>=0.16.0",
+  "mypy",
+  "typing-extensions",
+]
+
 docs = [
   "sphinx<9",
   "furo",
