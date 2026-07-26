@@ -21,6 +21,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Utilities",
   "Topic :: System :: Shells",
 ]
@@ -43,6 +44,34 @@ Repository = "https://github.com/tony/pytest-pgsnap"
 Changes = "https://github.com/tony/pytest-pgsnap/blob/master/CHANGES"
 
 [dependency-groups]
+dev = [
+  # Docs
+  "sphinx<9",
+  "furo",
+  "gp-libs>=0.0.19",
+  "sphinx-autobuild",
+  "sphinx-autodoc-typehints",
+  "sphinx-inline-tabs",
+  "sphinxext-opengraph",
+  "sphinx-copybutton",
+  "sphinxext-rediraffe",
+  "myst-parser",
+  "linkify-it-py",
+  # Testing
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-mock",
+  "pytest-watcher",
+  # Coverage
+  "codecov",
+  "coverage",
+  "pytest-cov",
+  # Lint
+  "ruff>=0.16.0",
+  "mypy",
+  "typing-extensions",
+]
+
 docs = [
   "sphinx<9",
   "furo",
@@ -69,13 +98,10 @@ coverage =[
   "pytest-cov",
 ]
 lint = [
-  "ruff",
+  "ruff>=0.16.0",
   "mypy",
   "typing-extensions",
 ]
-
-[project.entry-points.pytest11]
-sphinx = "pytest_pgsnap"
 
 [build-system]
 requires = ["hatchling"]
@@ -110,7 +136,6 @@ include = ["src/*"]
 [tool.hatch.build.targets.wheel]
 packages = [
   "src/pgsnap",
-  "src/pytest_pgsnap.py"
 ]
 
 [tool.mypy]
@@ -124,8 +149,11 @@ files = [
 [tool.ruff]
 target-version = "py310"
 
-[tool.lint]
-select = [
+[tool.ruff.lint]
+# `select` is deliberately unset: ruff 0.16 enables a curated default rule
+# set, and an explicit `select` would replace it rather than extend it.
+# `extend-select` layers this project's additional linters on top.
+extend-select = [
   "E", # pycodestyle
   "F", # pyflakes
   "I", # isort
@@ -151,7 +179,6 @@ ignore = [
 known-first-party = [
   "src",
   "pgsnap",
-  "pytest_pgsnap",
 ]
 combine-as-imports = true
 
@@ -160,6 +187,17 @@ convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
+"docs/conf.py" = [
+  # `linkcode_resolve` introspects arbitrary documented objects through
+  # `getattr` and `inspect`, which can raise anything. Each guard falls
+  # back to omitting one source link rather than failing the build, and
+  # the function tracks numpy's `conf.py` as cited in its docstring.
+  "BLE001",
+  # Sphinx reads the package's metadata by exec'ing a module from this
+  # repository, which keeps the docs build off an import of the package
+  # being documented.
+  "S102",
+]
 
 [tool.pytest.ini_options]
 addopts = "--tb=short --no-header --showlocals --doctest-modules"

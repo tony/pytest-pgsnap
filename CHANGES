@@ -14,9 +14,24 @@ $ pip install --user --upgrade --pre pytest-pgsnap
 - _Add your latest changes from PRs here_
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Breaking changes
+
+#### The bundled doctest collector is gone (#10)
+
+pytest-pgsnap shipped a stale copy of gp-libs' `doctest-docutils` plugin.
+Both registered the same options, so the two could never load together — the
+duplicate plugin name hid that by letting only one win. Depend on
+[gp-libs](https://gp-libs.git-pull.com) for doctest collection; this package
+no longer registers a pytest plugin at all.
+
 ### New features
 
 - Add stuff here
+
+### Fixes
+
+- The docs build reads version metadata from the package again, instead of a
+  module path that predated the package layout (#10)
 
 <!---
 .. vim: set filetype=markdown:
@@ -24,9 +39,35 @@ $ pip install --user --upgrade --pre pytest-pgsnap
 
 ### Development
 
+#### Python 3.14 and the pytest majors are tested (#10)
+
+The matrix covers Python 3.10 through 3.14 against pytest 7, 8, and 9 — the
+axis a pytest plugin integrates against, replacing an unused docutils one.
+3.14 is now declared in the classifiers. A `dev` dependency group was
+missing, so CI's install was a no-op and no job had ever reached the linter.
+
 #### CI actions updated to current majors
 
 Workflow actions moved to their current major releases: `actions/checkout` v7,
 `astral-sh/setup-uv` v9.0.0, `codecov/codecov-action` v7, and
 `dorny/paths-filter` v4. Workflow behavior is unchanged, though setup-uv no
 longer prunes the uv cache, so the first run after this repopulates it.
+
+#### Lint floor moved to ruff 0.16 (#10)
+
+Minimum `ruff>=0.16.0` (was unpinned). 0.16.0 stabilizes
+`none-not-at-end-of-union` (`RUF036`) out of preview, and starts formatting
+Python code blocks inside Markdown, so `ruff format` now covers the docs tree
+alongside `src/`.
+
+The rule selection also reaches ruff for the first time: it lived under a
+table name ruff does not read, so linting ran against ruff's built-in
+defaults. The configured prefixes — pydocstyle, isort, `flake8-use-pathlib`
+and the rest — are now enforced as written.
+
+Those prefixes extend ruff's default rule set rather than replace it. ruff
+0.16 ships a curated default set as its recommended baseline, and an explicit
+`select` opts out of the whole thing; the project now uses `extend-select` so
+both run together. `flake8-bandit`'s `exec` check and `flake8-blind-except`
+are ignored for `docs/conf.py`, where the Sphinx config reads package
+metadata and guards autodoc introspection.

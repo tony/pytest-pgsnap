@@ -13,10 +13,10 @@ This file provides guidance to AI agents (including Claude Code, Cursor, and oth
 
 ## Project Overview
 
-pytest-pgsnap is an experimental pytest plugin and snapshot toolkit in the gp-libs ecosystem. It combines a doctest/docutils-aware pytest plugin with early abstractions for caching side effects—especially small PostgreSQL databases—to speed up repeatable tests and documentation examples.
+pytest-pgsnap is an experimental snapshot toolkit in the gp-libs ecosystem. It provides early abstractions for caching side effects—especially small PostgreSQL databases—to speed up repeatable tests and documentation examples.
 
 Key features:
-- Pytest plugin (`src/pytest_pgsnap.py`) that collects doctests from `.rst`/`.md` files and selected `.py` modules via `doctest-docutils`, while blocking pytest's built-in doctest plugin to avoid double collection.
+- Doctest collection from `.rst`/`.md` sources comes from [gp-libs](https://gp-libs.git-pull.com), which owns the `doctest-docutils` pytest plugin. This package does not ship one.
 - pgsnap core module (`src/pgsnap/core.py`) sketching pluggable snapshot strategies for files and PostgreSQL (SQL emission, dumps, and template-based copies) plus pytest-oriented cache markers.
 - Strict typing (`mypy --strict`) and Ruff-powered formatting/linting.
 - Documentation built with Sphinx/Furo; shared tooling pulled from `gp-libs`.
@@ -82,7 +82,6 @@ make dev_docs       # concurrent rebuild+serve (GNU make -J)
 
 ## Code Architecture
 
-- **Pytest plugin** (`src/pytest_pgsnap.py`): custom collector for doctest-docutils; disables default pytest doctest plugin; provides `PytestDoctestRunner` that accumulates failures instead of aborting on first error.
 - **Snapshot core** (`src/pgsnap/core.py`): abstract bases for side-effect snapshots (files and PostgreSQL) including SQL emission, dump/restore, and template strategies, plus pytest fixture cache markers.
 - **Package metadata** (`src/pgsnap/__about__.py`): central metadata for packaging, docs, and distribution.
 - **Documentation** (`docs/`): Sphinx project with developing guide and placeholder API stubs.
@@ -203,7 +202,7 @@ Increment for each wrapper layer so `%(filename)s:%(lineno)d` and OTel `code.fil
 ### Testing logs
 
 Assert on `caplog.records` attributes, not string matching on `caplog.text`:
-- Scope capture: `caplog.at_level(logging.DEBUG, logger="pytest_pgsnap")`
+- Scope capture: `caplog.at_level(logging.DEBUG, logger="pgsnap")`
 - Filter records rather than index by position: `[r for r in caplog.records if hasattr(r, "pgsnap_fixture")]`
 - Assert on schema: `record.pgsnap_db_name == "testdb"` not `"testdb" in caplog.text`
 - `caplog.record_tuples` cannot access extra fields — always use `caplog.records`

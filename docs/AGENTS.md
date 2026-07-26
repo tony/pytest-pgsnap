@@ -20,7 +20,7 @@ that runs the examples in these very docs.
 
 A second, smaller reader works *on* pgsnap or against its lower
 layers: writing a custom `Snapshot` subclass, extending the collector
-in `pytest_pgsnap`, or contributing. Serve them too, but mark their
+in `pgsnap`, or contributing. Serve them too, but mark their
 material opt-in ("for the rarer cases", "advanced") so the default
 reader knows they can stop. Never make the common case pay a
 comprehension tax for the advanced one.

@@ -22,7 +22,7 @@ sys.path.insert(0, str(cwd / "_ext"))
 
 # package data
 about: dict[str, str] = {}
-with (project_root / "src" / "pgsnap.py").open() as fp:
+with (project_root / "src" / "pgsnap" / "__about__.py").open() as fp:
     exec(fp.read(), about)
 
 extensions = [
@@ -72,7 +72,7 @@ html_css_files = ["css/custom.css"]
 html_extra_path = ["manifest.json"]
 html_theme = "furo"
 html_theme_path: list[str] = []
-html_theme_options: dict[str, t.Union[str, list[dict[str, str]]]] = {
+html_theme_options: dict[str, str | list[dict[str, str]]] = {
     "light_logo": "img/icons/logo.svg",
     "dark_logo": "img/icons/logo-dark.svg",
     "footer_icons": [
@@ -103,7 +103,7 @@ html_sidebars = {
 }
 
 # linkify_issues
-issue_url_tpl = f'{about["__github__"]}/issues/{{issue_id}}'
+issue_url_tpl = f"{about['__github__']}/issues/{{issue_id}}"
 
 # sphinx.ext.autodoc
 autoclass_content = "both"
@@ -141,7 +141,7 @@ intersphinx_mapping = {
 }
 
 
-def linkcode_resolve(domain: str, info: dict[str, str]) -> t.Union[None, str]:
+def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     """
     Determine the URL corresponding to Python object.
 
