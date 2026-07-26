@@ -22,7 +22,7 @@ sys.path.insert(0, str(cwd / "_ext"))
 
 # package data
 about: dict[str, str] = {}
-with (project_root / "src" / "pgsnap.py").open() as fp:
+with (project_root / "src" / "pgsnap" / "__about__.py").open() as fp:
     exec(fp.read(), about)
 
 extensions = [
