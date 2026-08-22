@@ -137,6 +137,12 @@ include = ["src/*"]
 packages = [
   "src/pgsnap",
 ]
+# AGENTS.md (+ its CLAUDE.md symlink) is contributor guidance, not a package
+# resource; it would otherwise ship inside every install.
+exclude = [
+  "src/pgsnap/AGENTS.md",
+  "src/pgsnap/CLAUDE.md",
+]
 
 [tool.mypy]
 strict = true
