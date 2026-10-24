@@ -46,7 +46,7 @@ Changes = "https://github.com/tony/pytest-pgsnap/blob/master/CHANGES"
 [dependency-groups]
 dev = [
   # Docs
-  "sphinx<9",
+  "sphinx",
   "furo",
   "gp-libs>=0.0.19",
   "sphinx-autobuild",
@@ -73,7 +73,7 @@ dev = [
 ]
 
 docs = [
-  "sphinx<9",
+  "sphinx",
   "furo",
   "gp-libs>=0.0.19",
   "sphinx-autobuild",
