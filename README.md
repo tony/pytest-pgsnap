@@ -52,7 +52,7 @@ wired into pytest: there is no `pytest11` entry point, and importing
 
 ## More information
 
-- Python support: `>=3.10,<4.0`
+- Python support: `>=3.11,<4.0`
 - Source: <https://github.com/tony/pytest-pgsnap>
 - Docs: <https://pytest-pgsnap.git-pull.com>
 - Changelog: <https://pytest-pgsnap.git-pull.com/history.html>

@@ -24,6 +24,10 @@ duplicate plugin name hid that by letting only one win. Depend on
 [gp-libs](https://gp-libs.git-pull.com) for doctest collection; this package
 no longer registers a pytest plugin at all.
 
+#### Python 3.11 is now the minimum
+
+pytest-pgsnap now requires Python 3.11 or newer. Python 3.10 reached end of life in October 2026. The test matrix now covers Python 3.11 through 3.15.
+
 ### New features
 
 - Add stuff here
@@ -41,7 +45,7 @@ no longer registers a pytest plugin at all.
 
 #### Python 3.14 and the pytest majors are tested (#10)
 
-The matrix covers Python 3.10 through 3.14 against pytest 7, 8, and 9 — the
+The matrix covers Python 3.11 through 3.14 against pytest 7, 8, and 9 — the
 axis a pytest plugin integrates against, replacing an unused docutils one.
 3.14 is now declared in the classifiers. A `dev` dependency group was
 missing, so CI's install was a no-op and no job had ever reached the linter.
